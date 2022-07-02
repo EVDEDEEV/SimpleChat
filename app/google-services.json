@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "704054935468",
+    "firebase_url": "https://fir-chat-7ba08-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "fir-chat-7ba08",
+    "storage_bucket": "fir-chat-7ba08.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:704054935468:android:a37e150aee20b57d7bc409",
+        "android_client_info": {
+          "package_name": "my.project.simplechat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "704054935468-0lavd6il9ka66hbt2huiee7n4egr6ek8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPmsoTAnx5XoigV3c0aPAtPUbWkwXcrQc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "704054935468-0lavd6il9ka66hbt2huiee7n4egr6ek8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
