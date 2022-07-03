@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "704054935468-jf60p04ms9gg3b614iub5ngrduu6uu47.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "my.project.simplechat",
+            "certificate_hash": "37631262bd63e2a8063ce1ee6dd4b4fd7aaeee35"
+          }
+        },
+        {
           "client_id": "704054935468-0lavd6il9ka66hbt2huiee7n4egr6ek8.apps.googleusercontent.com",
           "client_type": 3
         }
