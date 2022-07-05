@@ -1,4 +1,4 @@
-package my.project.simplechat
+package my.project.simplechat.presentation
 
 import android.content.Intent
 import android.os.Bundle
@@ -11,10 +11,10 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.GoogleAuthCredential
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import my.project.simplechat.R
 import my.project.simplechat.databinding.ActivitySingInBinding
 
 class SingInActivity : AppCompatActivity() {
@@ -28,7 +28,7 @@ class SingInActivity : AppCompatActivity() {
         binding = ActivitySingInBinding.inflate(layoutInflater)
         setContentView(binding.root)
         auth = Firebase.auth
-//        auth.currentUser
+        auth.currentUser
         launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
             val task = GoogleSignIn.getSignedInAccountFromIntent(it.data)
             try {
@@ -36,8 +36,6 @@ class SingInActivity : AppCompatActivity() {
                 if (account != null) {
                     account.idToken?.let { it1 -> firebaseAuthWithGoogle(it1) }
                 }
-
-
             } catch (e: ApiException) {
                 Log.d("MyLog", "Api exception")
             }
@@ -45,6 +43,7 @@ class SingInActivity : AppCompatActivity() {
         binding.btnSignIn.setOnClickListener {
             signInWithGoogle()
         }
+        checkAuthState()
     }
 
     private fun getClient(): GoogleSignInClient {
@@ -67,10 +66,18 @@ class SingInActivity : AppCompatActivity() {
         val credential = GoogleAuthProvider.getCredential(idToken, null)
         auth.signInWithCredential(credential).addOnCompleteListener {
             if (it.isSuccessful) {
+                checkAuthState()
                 Log.d("MyLog", "Google signIn done")
             } else {
                 Log.d("MyLog", "Google signIn error")
             }
+        }
+    }
+
+    private fun checkAuthState() {
+        if (auth.currentUser != null) {
+            val mainActivityStartIntent = Intent(this, MainActivity::class.java)
+            startActivity(mainActivityStartIntent)
         }
     }
 }
