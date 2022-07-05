@@ -32,13 +32,13 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         auth = Firebase.auth
         setupActionBar()
-
         val database = Firebase.database
-        val myRef = database.getReference("message")
+        val myRef = database.getReference("messages")
 
         binding.btnSend.setOnClickListener {
             myRef.child(myRef.push().key ?: "kek")
-                .setValue(User(auth.currentUser?.displayName, binding.editText.text.toString()))
+                .setValue(User(auth.currentUser?.displayName,
+                    binding.editText.text.toString()))
         }
         onChangeListened(myRef)
         initRecyclerView()

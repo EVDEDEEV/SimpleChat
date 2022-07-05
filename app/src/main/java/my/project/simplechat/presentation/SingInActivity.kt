@@ -28,18 +28,20 @@ class SingInActivity : AppCompatActivity() {
         binding = ActivitySingInBinding.inflate(layoutInflater)
         setContentView(binding.root)
         auth = Firebase.auth
-        auth.currentUser
-        launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-            val task = GoogleSignIn.getSignedInAccountFromIntent(it.data)
-            try {
-                val account = task.getResult(ApiException::class.java)
-                if (account != null) {
-                    account.idToken?.let { it1 -> firebaseAuthWithGoogle(it1) }
+        launcher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+                val task = GoogleSignIn.getSignedInAccountFromIntent(it.data)
+                try {
+                    val account = task.getResult(ApiException::class.java)
+                    if (account != null) {
+                        account.idToken?.let { it1 -> firebaseAuthWithGoogle(it1) }
+//                        firebaseAuthWithGoogle(account.idToken!!)
+
+                    }
+                } catch (e: ApiException) {
+                    Log.d("MyLog", "Api exception")
                 }
-            } catch (e: ApiException) {
-                Log.d("MyLog", "Api exception")
             }
-        }
         binding.btnSignIn.setOnClickListener {
             signInWithGoogle()
         }
@@ -56,7 +58,6 @@ class SingInActivity : AppCompatActivity() {
 
     }
 
-
     private fun signInWithGoogle() {
         val singInClient = getClient()
         launcher.launch(singInClient.signInIntent)
@@ -66,8 +67,8 @@ class SingInActivity : AppCompatActivity() {
         val credential = GoogleAuthProvider.getCredential(idToken, null)
         auth.signInWithCredential(credential).addOnCompleteListener {
             if (it.isSuccessful) {
-                checkAuthState()
                 Log.d("MyLog", "Google signIn done")
+                checkAuthState()
             } else {
                 Log.d("MyLog", "Google signIn error")
             }

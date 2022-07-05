@@ -19,7 +19,8 @@ class UserAdapter : ListAdapter<User, UserAdapter.ItemHolder>(ItemComparator()) 
 
         companion object {
             fun create(parent: ViewGroup): ItemHolder {
-                return ItemHolder(binding = UserListItemBinding.inflate(LayoutInflater.from(parent.context),
+                return ItemHolder(binding = UserListItemBinding
+                    .inflate(LayoutInflater.from(parent.context),
                     parent,
                     false))
             }
