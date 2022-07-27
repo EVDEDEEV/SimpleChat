@@ -4,6 +4,8 @@ import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
@@ -25,6 +27,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
     lateinit var auth: FirebaseAuth
     lateinit var adapter: UserAdapter
+    private val view: View? = this.currentFocus
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,10 +42,19 @@ class MainActivity : AppCompatActivity() {
             myRef.child(myRef.push().key ?: "kek")
                 .setValue(User(auth.currentUser?.displayName,
                     binding.editText.text.toString()))
+            binding.editText.setText("")
+            if (view != null) {
+                val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+                imm.hideSoftInputFromWindow(view.windowToken, 0)
+            }
+            binding.rcView.smoothScrollToPosition(binding.rcView.adapter?.itemCount!!.toInt() - 1)
         }
         onChangeListened(myRef)
         initRecyclerView()
+
+
     }
+
 
     private fun initRecyclerView() = with(binding) {
         adapter = UserAdapter()

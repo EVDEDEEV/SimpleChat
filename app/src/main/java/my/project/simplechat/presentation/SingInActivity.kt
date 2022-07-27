@@ -35,7 +35,7 @@ class SingInActivity : AppCompatActivity() {
                     val account = task.getResult(ApiException::class.java)
                     if (account != null) {
                         account.idToken?.let { it1 -> firebaseAuthWithGoogle(it1) }
-//                        firebaseAuthWithGoogle(account.idToken!!)
+                        firebaseAuthWithGoogle(account.idToken!!)
 
                     }
                 } catch (e: ApiException) {
