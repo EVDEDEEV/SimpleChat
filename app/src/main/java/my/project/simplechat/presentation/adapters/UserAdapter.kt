@@ -45,4 +45,6 @@ class UserAdapter : ListAdapter<User, UserAdapter.ItemHolder>(ItemComparator()) 
     override fun onBindViewHolder(holder: ItemHolder, position: Int) {
         holder.bind(getItem(position))
     }
+
 }
+

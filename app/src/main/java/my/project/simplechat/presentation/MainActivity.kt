@@ -28,6 +28,8 @@ class MainActivity : AppCompatActivity() {
     lateinit var auth: FirebaseAuth
     lateinit var adapter: UserAdapter
     private val view: View? = this.currentFocus
+    val database = Firebase.database
+    val myRef = database.getReference("messages")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,8 +37,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         auth = Firebase.auth
         setupActionBar()
-        val database = Firebase.database
-        val myRef = database.getReference("messages")
 
         binding.btnSend.setOnClickListener {
             myRef.child(myRef.push().key ?: "kek")
@@ -48,13 +48,11 @@ class MainActivity : AppCompatActivity() {
                 imm.hideSoftInputFromWindow(view.windowToken, 0)
             }
             binding.rcView.smoothScrollToPosition(binding.rcView.adapter?.itemCount!!.toInt() - 1)
+
         }
         onChangeListened(myRef)
         initRecyclerView()
-
-
     }
-
 
     private fun initRecyclerView() = with(binding) {
         adapter = UserAdapter()
@@ -104,4 +102,6 @@ class MainActivity : AppCompatActivity() {
             }
         }.start()
     }
+
 }
+

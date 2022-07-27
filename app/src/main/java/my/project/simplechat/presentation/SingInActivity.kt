@@ -36,10 +36,9 @@ class SingInActivity : AppCompatActivity() {
                     if (account != null) {
                         account.idToken?.let { it1 -> firebaseAuthWithGoogle(it1) }
                         firebaseAuthWithGoogle(account.idToken!!)
-
                     }
                 } catch (e: ApiException) {
-                    Log.d("MyLog", "Api exception")
+                    Log.d("MyLog", "Api exception", task.exception)
                 }
             }
         binding.btnSignIn.setOnClickListener {
@@ -48,6 +47,7 @@ class SingInActivity : AppCompatActivity() {
         checkAuthState()
     }
 
+
     private fun getClient(): GoogleSignInClient {
         val gso = GoogleSignInOptions
             .Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -55,7 +55,6 @@ class SingInActivity : AppCompatActivity() {
             .requestEmail()
             .build()
         return GoogleSignIn.getClient(this, gso)
-
     }
 
     private fun signInWithGoogle() {
