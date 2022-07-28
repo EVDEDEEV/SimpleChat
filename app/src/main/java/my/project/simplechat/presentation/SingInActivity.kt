@@ -80,6 +80,10 @@ class SingInActivity : AppCompatActivity() {
             startActivity(mainActivityStartIntent)
         }
     }
+
+
+
+
 }
 
 
